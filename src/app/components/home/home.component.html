@@ -1,0 +1,126 @@
+<div class="portfolio">
+    <nav class="navbar">
+        <div class="logo">
+            <img src="assets/images/avatar.png" alt="Profile Picture" />
+            Welcome to Cathy Loke Portfolio
+        </div>
+        <ul class="nav-links">
+            <li><a (click)="scrollToSection('about')">About Me</a></li>
+            <li><a (click)="scrollToSection('projects')">Projects</a></li>
+            <li><a (click)="scrollToSection('skills')">Skills</a></li>
+            <li><a (click)="scrollToSection('contact')">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="home" id="home">
+        <div class="home-content">
+            <h1>Hello Bello, I'm Loke Weng Yan (Cathy) !!! </h1>
+            <p>I'm a Software Engineering degree student at UTAR, Sungai Long campus.</p>
+            <p>Currently working as Software Engineer Intern at PAIDChain Sdn Bhd.</p>
+            <button class="home-button" (click)="scrollToSection('projects')">View My Work</button>
+            <button class="home-button" (click)="scrollToSection('contact')">Contact me</button>
+        </div>
+    </section>
+
+
+    <section class="about" id="about">
+        <h2>About Me</h2>
+        <div class="about-content">
+            <img src="assets/images/profile.jpg" alt="Profile Picture" class="profile-pic" />
+            <div>
+                <p>
+                    I am a final year software engineering student passionate about creating meaningful and efficient
+                    digital solutions.
+                </p>
+                <button class="about-button" (click)="aboutMeDetails = !aboutMeDetails">Click to explore more</button>
+            </div>
+        </div>
+        <br>
+        <div *ngIf="aboutMeDetails">
+            <div class="timeline">
+                <h2>Working Experiences</h2>
+                <mat-card *ngFor="let experience of workingExperiences" class="timeline-item">
+                    <div class="timeline-header">
+                        <img [src]="experience.image" class="timeline-img" />
+                        <div>
+                            <h3 class="timeline-title">{{ experience.title }} | {{ experience.area }}</h3>
+                            <p class="duration">{{ experience.duration }}</p>
+                        </div>
+                    </div>
+                    <mat-card-content>
+                        <ul>
+                            <li *ngFor="let job of experience.jobs">{{ job }}</li>
+                        </ul>
+                    </mat-card-content>
+                </mat-card>
+            </div>
+            <br>
+            <div class="timeline">
+                <h2>Leadership & Extracurricular Activities</h2>
+                <h3>Leadership</h3>
+                <mat-card *ngFor="let leadership of leaderships" class="timeline-item">
+                    <div class="timeline-header">
+                        <img [src]="leadership.image" class="timeline-img" />
+                        <div>
+                            <h3 class="timeline-title">{{ leadership.title }} | {{ leadership.organization }}</h3>
+                            <p class="duration">{{ leadership.duration }}</p>
+                        </div>
+                    </div>
+                    <mat-card-content>
+                        <ul>
+                            <li *ngFor="let desc of leadership.description">{{ desc }}</li>
+                        </ul>
+                    </mat-card-content>
+                </mat-card>
+                <h3>Extracurricular Activities</h3>
+                <mat-card *ngFor="let activity of activities" class="timeline-item">
+                    <div class="timeline-header">
+                        <!-- <img [src]="leadership.image" class="timeline-img" /> -->
+                        <div>
+                            <h3 class="timeline-title">{{ activity.achievement }} | {{ activity.name }}</h3>
+                            <p class="organizer">Organizer: {{activity.organizer}}</p>
+                            <p class="duration">{{ activity.duration }}</p>
+                        </div>
+                    </div>
+                </mat-card>
+            </div>
+        </div>
+    </section>
+
+
+    <section class="projects" id="projects">
+        <h2>My Projects</h2>
+        <div class="project-grid">
+            <div class="project-card" *ngFor="let project of projects" (click)="navigateToLink(project.link)">
+                <h3>{{project.title}}</h3>
+                <p>{{project.description}}</p>
+                <p class="link">{{project.link}}</p>
+            </div>
+        </div>
+        <button class="project-button" (click)="navigateToLink('https://github.com/cathyloke')">
+            Click to find more
+        </button>
+    </section>
+
+
+    <section class=" skills" id="skills">
+        <h2>Skills</h2>
+        <div class="skills-list-grid">
+            <div class="skill-item" *ngFor="let skill of skills">{{skill}}</div>
+        </div>
+    </section>
+
+
+    <section class="contact" id="contact">
+        <h2>Contact Me</h2>
+        <form (ngSubmit)="onSubmit()">
+            <input [(ngModel)]="email" name="email" type="email" placeholder="Enter Your Email" required />
+            <textarea [(ngModel)]="message" name="message" placeholder="Send Your Message" required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <footer class="footer">
+        <p>© 2024 Loke Weng Yan. All Rights Reserved.</p>
+    </footer>
+</div>
